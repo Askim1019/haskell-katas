@@ -32,6 +32,14 @@ tell :: [a] -> String
 tell [] = "This list is empty"
 tell _ = "This list is NOT empty"
 
+length' :: [a] -> Int
+length' [] = 0
+length' (x:xs) = 1 + length' xs
+
+sum' :: [Int] -> Int
+sum' [] = 0
+sum' (x:xs) = x + sum' xs
+
 spec :: Spec
 spec = do
   describe "Pattern matching" $ do
@@ -59,13 +67,11 @@ spec = do
       -- tell [1,2] `shouldBe` "This list has two elements: 1 and 2"
       -- tell [1,2,3] `shouldBe` "This list is too long"
     it "can count elements in list with recursion" $ do
-      pending
-      -- length' [] `shouldBe` 0
-      -- length' [1,2,3] `shouldBe` 3
+      length' [] `shouldBe` 0
+      length' [1,2,3] `shouldBe` 3
     it "can reduce add a list" $ do
-      pending
-      -- sum' [] `shouldBe` 0
-      -- sum' [1,2,3] `shouldBe` 6
+      sum' [] `shouldBe` 0
+      sum' [1,2,3] `shouldBe` 6
     it "can hold the original item with pattern" $ do
       pending
       -- firstLetter "" `shouldBe` "Empty string, whoops!"
