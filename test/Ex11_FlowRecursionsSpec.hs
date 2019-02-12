@@ -7,15 +7,23 @@ import Test.Hspec
 main :: IO ()
 main = hspec spec
 
+-- maximum' :: [Int] -> Int
+maximum' :: (Ord a) => [a] -> a
+maximum' [x] = x
+maximum' (x:xs) = x `max` maximum' xs
+
+replicate' :: Int -> a -> [a]
+replicate' 1 x = [x]
+replicate' n x = x : replicate' (n - 1) x
+-- 2 `max` 5 `max` 1
 spec :: Spec
 spec = do
   describe "Recursion" $ do
     it "calculates maximum" $ do
-      pending
-      -- maximum' [2,5,1] `shouldBe` 5
+      maximum' [2,5,1] `shouldBe` 5
+      maximum' "abc"`shouldBe` 'c'
     it "replicates items" $ do
-      pending
-      -- replicate' 5 'a' `shouldBe` "aaaaa"
+      replicate' 5 'a' `shouldBe` "aaaaa"
     it "takes from a collection" $ do
       pending
       -- take' 3 "abcde" `shouldBe` "abc"
